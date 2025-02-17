@@ -1,19 +1,18 @@
-const API_KEY = "bc7c4e7c62d9e223e196bbd15978fc51"; // 🔥 TMDB API Key
+const API_KEY = "bc7c4e7c62d9e223e196bbd15978fc51";
 const movie = JSON.parse(localStorage.getItem("selectedMovie"));
 
 if (!movie) {
-    alert("No movie selected!");
-    window.location.href = "../homePage/homePage.html"; // ✅ Redirect if no movie is selected
+    alert("no movie selected!");
+    window.location.href = "../homePage/homePage.html";
 } else {
     document.getElementById("movieTitle").textContent = movie.title;
     document.getElementById("moviePoster").src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
     document.getElementById("releaseYear").textContent = movie.release_date ? movie.release_date.split("-")[0] : "N/A";
-    document.getElementById("movieDescription").textContent = movie.overview || "No description available.";
+    document.getElementById("movieDescription").textContent = movie.overview || "no description available.";
 
     fetchMovieCast(movie.id);
 }
 
-// ✅ Fetch movie cast from TMDB API & make actors clickable
 async function fetchMovieCast(movieId) {
     try {
         const response = await fetch(
@@ -22,7 +21,7 @@ async function fetchMovieCast(movieId) {
         const data = await response.json();
 
         if (!data.cast || data.cast.length === 0) {
-            document.getElementById("movieCast").textContent = "Cast information not available.";
+            document.getElementById("movieCast").textContent = "cast information not available.";
             return;
         }
 
@@ -33,13 +32,13 @@ async function fetchMovieCast(movieId) {
 
         document.getElementById("movieCast").innerHTML = castList.join(", ");
     } catch (error) {
-        console.error("❌ Error fetching cast:", error);
+        console.error("error fetching cast:", error);
         document.getElementById("movieCast").textContent = "Error loading cast.";
     }
 }
 
 window.selectActor = function (actorId, actorName) {
-    console.log("✅ Saving actor:", actorId, actorName); // Debugging log
+    console.log("saving actor:", actorId, actorName); // Debugging log
     localStorage.setItem("selectedActor", JSON.stringify({ id: actorId, name: actorName }));
     window.location.href = "../actorPage/actorPage.html";
 };
