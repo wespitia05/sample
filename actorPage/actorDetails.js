@@ -1,15 +1,15 @@
-const API_KEY = "bc7c4e7c62d9e223e196bbd15978fc51"; // 🔥 TMDB API Key
+const API_KEY = "bc7c4e7c62d9e223e196bbd15978fc51";
 
-document.addEventListener("DOMContentLoaded", function () { // ✅ Ensure HTML is loaded first
+document.addEventListener("DOMContentLoaded", function () {
     const actor = JSON.parse(localStorage.getItem("selectedActor"));
 
     if (!actor) {
-        alert("No actor selected!");
-        window.location.href = "../homePage/homePage.html"; // ✅ Redirect if no actor is selected
+        alert("no actor selected!");
+        window.location.href = "../homePage/homePage.html";
         return;
     }
 
-    console.log("🟢 Loaded actor from storage:", actor); // ✅ Debugging Log
+    console.log("loaded actor from storage:", actor);
     fetchActorDetails(actor.id);
 });
 
@@ -20,28 +20,27 @@ async function fetchActorDetails(actorId) {
         );
         const data = await response.json();
 
-        console.log("🟢 Full Actor Data from TMDB:", data); // ✅ Debugging Log
+        console.log("full actor data from TMDB:", data);
 
         if (!data || !data.name) {
-            console.error("❌ No valid actor data found!");
-            document.getElementById("actorBio").textContent = "Error loading actor details.";
+            console.error("no valid actor data found!");
+            document.getElementById("actorBio").textContent = "error loading actor details";
             return;
         }
 
-        // ✅ Debugging: Check if elements exist before updating
-        console.log("🟢 Updating HTML with actor data...");
+        console.log("updating HTML with actor data...");
 
         document.getElementById("actorName").textContent = data.name || "Unknown Actor";
         document.getElementById("actorImage").src = data.profile_path
             ? `https://image.tmdb.org/t/p/w500${data.profile_path}`
-            : "https://via.placeholder.com/400/cccccc/ffffff?text=No+Image"; // ✅ Working placeholder
+            : "https://via.placeholder.com/400/cccccc/ffffff?text=No+Image";
 
         document.getElementById("actorBio").textContent = data.biography || "Biography not available.";
 
         fetchActorMovies(actorId);
     } catch (error) {
-        console.error("❌ Error fetching actor details:", error);
-        document.getElementById("actorBio").textContent = "Error loading actor details.";
+        console.error("error fetching actor details:", error);
+        document.getElementById("actorBio").textContent = "error loading actor details.";
     }
 }
 
