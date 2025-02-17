@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="module" src="firebaseCreate.js"></script>
+</head>
+<body>
+<div class="container">
+    <h2>Create Account</h2>
+    <form id="signup">
+        <input type="firstName" name="firstName" placeholder="First Name" id="firstName" required>
+        <input type="lastName" name="lastName" placeholder="Last Name" id="lastName" required>
+        <input type="email" name="email" placeholder="Email" id="email" required>
+        <input type="text" name="username" placeholder="Username" id="username" required>
+        <input type="password" name="password" placeholder="Password" id="password" required>
+        <button type="submit" id="submit">Sign Up</button>
+        <div class="back2login" onclick="location.href='../login/login.html'">Back To Log In</div>
+    </form>
+</div>
+</body>
+</html>
